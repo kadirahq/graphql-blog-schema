@@ -39,6 +39,7 @@
   "dependencies": {
     "react": "^0.13.0",
     "graphiql": "0.3.x",
-    "isomorphic-fetch": "*"
+    "isomorphic-fetch": "*",
+    "underscore": "1.8.x"
   }
 }
