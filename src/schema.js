@@ -1,6 +1,8 @@
+import * as _ from 'underscore';
+
 import PostsList from './data/posts';
 import AuthorsMap from './data/authors';
-import * as _ from 'underscore';
+import {CommentList, ReplyList} from './data/comments';
 
 import {
   GraphQLList,
@@ -9,7 +11,8 @@ import {
   GraphQLString,
   GraphQLInt,
   GraphQLFloat,
-  GraphQLEnumType
+  GraphQLEnumType,
+  GraphQLNonNull
 } from 'graphql';
 
 const Category = new GraphQLEnumType({
@@ -48,7 +51,10 @@ const Comment = new GraphQLObjectType({
     timestamp: {type: GraphQLFloat},
     replies: {
       type: new GraphQLList(Comment),
-      description: "Replies for the comment"
+      description: "Replies for the comment",
+      resolve: function() {
+        return ReplyList;
+      }
     }
   })
 });
@@ -72,7 +78,12 @@ const Post = new GraphQLObjectType({
         }
       }
     },
-    comments: {type: new GraphQLList(Comment)},
+    comments: {
+      type: new GraphQLList(Comment),
+      resolve: function(post) {
+        return CommentList;
+      }
+    },
     author: {
       type: Author,
       resolve: function({author}) {
@@ -93,7 +104,7 @@ const Schema = new GraphQLSchema({
         args: {
           category: {type: Category}
         },
-        resolve: function(prev, {category}) {
+        resolve: function(source, {category}) {
           if(category) {
             return _.filter(PostsList, post => post.category === category);
           } else {
@@ -106,10 +117,17 @@ const Schema = new GraphQLSchema({
         type: new GraphQLList(Post),
         description: "Get recent posts in the blog",
         args: {
-          count: {type: GraphQLInt, description: 'Number of recent items'}
+          count: {type: new GraphQLNonNull(GraphQLInt), description: 'Number of recent items'}
         },
-        resolve: function(_, {count}) {
-          return []
+        resolve: function(source, {count}) {
+          PostsList.sort((a, b) => {
+            var bTime = new Date(b.date['$date']).getTime();
+            var aTime = new Date(a.date['$date']).getTime();
+
+            return bTime - aTime;
+          });
+
+          return PostsList.slice(0, count)
         }
       },
 
@@ -119,8 +137,8 @@ const Schema = new GraphQLSchema({
         args: {
           _id: {type: GraphQLString}
         },
-        resolve: function(_, {_id}) {
-          return null
+        resolve: function(source, {_id}) {
+          return _.filter(PostsList, post => post._id === _id)[0];
         }
       }
     })
