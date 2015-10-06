@@ -80,7 +80,14 @@ const Post = new GraphQLObjectType({
     },
     comments: {
       type: new GraphQLList(Comment),
-      resolve: function(post) {
+      args: {
+        limit: {type: GraphQLInt, description: "Limit the comments returing"}
+      },
+      resolve: function(post, {limit}) {
+        if(limit >= 0) {
+          return CommentList.slice(0, limit);
+        }
+
         return CommentList;
       }
     },
