@@ -113,6 +113,21 @@ const Schema = new GraphQLSchema({
         }
       },
 
+      getLatestPost: {
+        type: Post,
+        description: "Get the latest post in the blog",
+        resolve: function() {
+          PostsList.sort((a, b) => {
+            var bTime = new Date(b.date['$date']).getTime();
+            var aTime = new Date(a.date['$date']).getTime();
+
+            return bTime - aTime;
+          });
+
+          return PostsList[0];
+        }
+      },
+
       getRecentPosts: {
         type: new GraphQLList(Post),
         description: "Get recent posts in the blog",
@@ -139,6 +154,14 @@ const Schema = new GraphQLSchema({
         },
         resolve: function(source, {_id}) {
           return _.filter(PostsList, post => post._id === _id)[0];
+        }
+      },
+
+      getAuthors: {
+        type: new GraphQLList(Author),
+        description: "Get the available authors in the blog",
+        resolve: function() {
+          return _.values(AuthorsMap);
         }
       }
     })
