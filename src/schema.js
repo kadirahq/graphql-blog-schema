@@ -37,7 +37,7 @@ const Query = new GraphQLObjectType({
         message: {type: GraphQLString}
       },
       resolve: function(source, {message}) {
-        return `recieved ${message}`;
+        return `received ${message}`;
       }
     }
   })
