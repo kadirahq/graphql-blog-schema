@@ -22,7 +22,7 @@ import {
 } from 'graphql';
 
 /**
-  DEFINE YOUR TYPES HERE
+  DEFINE YOUR TYPES BELOW
 **/
 
 // This is the Root Query
