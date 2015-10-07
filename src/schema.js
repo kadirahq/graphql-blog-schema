@@ -169,6 +169,17 @@ const Query = new GraphQLObjectType({
       resolve: function() {
         return _.values(AuthorsMap);
       }
+    },
+
+    getAuthorById: {
+      type: Author,
+      description: "Get the author by given author id",
+      args: {
+        _id: {type: new GraphQLNonNull(GraphQLString)}
+      },
+      resolve: function(source, {_id}) {
+        return AuthorsMap[_id];
+      }
     }
   })
 });

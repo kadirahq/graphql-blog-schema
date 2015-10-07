@@ -6,7 +6,7 @@ window.a = require('graphql');
 
 export default class App extends Component {
   fetchData({query, variables}) {
-    return window.a.graphql(Schema, query, null, variables);
+    return window.a.graphql(Schema, query, null, JSON.parse(variables));
   }
 
   render() {
