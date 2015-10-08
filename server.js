@@ -1,15 +1,15 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+require("babel/register");
+var express = require('express');
+var graphql = require('graphql');
+var expressGraphql = require('express-graphql');
+var Schema = require('./server/schema.js');
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true
-}).listen(3000, 'localhost', function (err, result) {
-  if (err) {
-    console.log(err);
-  }
+var app = express();
 
-  console.log('Listening at localhost:3000');
-});
+app.use('/', expressGraphql({
+  schema: Schema,
+  graphiql: true
+}));
+
+app.listen(3000);
+console.log("GraphQL Sandbox started on port: 3000");
