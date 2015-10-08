@@ -25,11 +25,42 @@ import {
   DEFINE YOUR TYPES BELOW
 **/
 
+const Author = new GraphQLObjectType({
+  name: "Author",
+  description: "This represent an author",
+  fields: () => ({
+    _id: {type: new GraphQLNonNull(GraphQLString)},
+    name: {type: GraphQLString}
+  })
+});
+
+const Post = new GraphQLObjectType({
+  name: "Post",
+  description: "This represent a Post",
+  fields: () => ({
+    _id: {type: new GraphQLNonNull(GraphQLString)},
+    title: {type: new GraphQLNonNull(GraphQLString)},
+    content: {type: GraphQLString},
+    author: {
+      type: Author,
+      resolve: function(post) {
+        return _.find(AuthorsList, a => a._id == post.author);
+      }
+    }
+  })
+});
+
 // This is the Root Query
 const Query = new GraphQLObjectType({
   name: 'BlogQueries',
   description: "Root of the Blog Schema",
   fields: () => ({
+    getPosts: {
+      type: new GraphQLList(Post),
+      resolve: function() {
+        return PostsList;
+      }
+    },
     echo: {
       type: GraphQLString,
       description: "Echo what you enter",
@@ -37,7 +68,7 @@ const Query = new GraphQLObjectType({
         message: {type: GraphQLString}
       },
       resolve: function(source, {message}) {
-        return `received ${message}`;
+        return {aa: 10};
       }
     }
   })
