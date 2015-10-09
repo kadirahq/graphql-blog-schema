@@ -1,6 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 
+var plugins = [new webpack.HotModuleReplacementPlugin()];
+if(process.env.NODE_ENV === "production") {
+  plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true, comments: false}));
+}
+
 module.exports = {
   devtool: 'eval',
   entry: [
@@ -13,9 +18,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/'
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  plugins: plugins,
   module: {
     loaders: [{
       test: /\.js$/,
