@@ -41,6 +41,7 @@
     "graphiql": "0.3.x",
     "graphql": "0.4.x",
     "isomorphic-fetch": "*",
-    "underscore": "1.8.x"
+    "underscore": "1.8.x",
+    "compression": "1.x"
   }
 }
