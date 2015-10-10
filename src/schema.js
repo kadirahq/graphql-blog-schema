@@ -101,12 +101,12 @@ const Post = new GraphQLObjectType({
 });
 
 const Query = new GraphQLObjectType({
-  name: 'BlogQueries',
+  name: 'BlogSchema',
   description: "Root of the Blog Schema",
   fields: () => ({
-    getPosts: {
+    posts: {
       type: new GraphQLList(Post),
-      description: "Get a list of posts in the blog",
+      description: "List of posts in the blog",
       args: {
         category: {type: Category}
       },
@@ -119,9 +119,9 @@ const Query = new GraphQLObjectType({
       }
     },
 
-    getLatestPost: {
+    latestPost: {
       type: Post,
-      description: "Get the latest post in the blog",
+      description: "Latest post in the blog",
       resolve: function() {
         PostsList.sort((a, b) => {
           var bTime = new Date(b.date['$date']).getTime();
@@ -134,9 +134,9 @@ const Query = new GraphQLObjectType({
       }
     },
 
-    getRecentPosts: {
+    recentPosts: {
       type: new GraphQLList(Post),
-      description: "Get recent posts in the blog",
+      description: "Recent posts in the blog",
       args: {
         count: {type: new GraphQLNonNull(GraphQLInt), description: 'Number of recent items'}
       },
@@ -152,28 +152,28 @@ const Query = new GraphQLObjectType({
       }
     },
 
-    getPostById: {
+    post: {
       type: Post,
-      description: "Get a post by it's _id",
+      description: "Post by _id",
       args: {
-        _id: {type: GraphQLString}
+        _id: {type: new GraphQLNonNull(GraphQLString)}
       },
       resolve: function(source, {_id}) {
         return _.filter(PostsList, post => post._id === _id)[0];
       }
     },
 
-    getAuthors: {
+    authors: {
       type: new GraphQLList(Author),
-      description: "Get the available authors in the blog",
+      description: "Available authors in the blog",
       resolve: function() {
         return _.values(AuthorsMap);
       }
     },
 
-    getAuthorById: {
+    author: {
       type: Author,
-      description: "Get the author by given author id",
+      description: "Author by _id",
       args: {
         _id: {type: new GraphQLNonNull(GraphQLString)}
       },
