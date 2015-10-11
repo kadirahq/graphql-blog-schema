@@ -27,7 +27,7 @@ import {
 
 // This is the Root Query
 const Query = new GraphQLObjectType({
-  name: 'BlogQueries',
+  name: 'BlogSchema',
   description: "Root of the Blog Schema",
   fields: () => ({
     echo: {
