@@ -52,10 +52,10 @@ const Post = new GraphQLObjectType({
 
 // This is the Root Query
 const Query = new GraphQLObjectType({
-  name: 'BlogQueries',
+  name: 'BlogSchema',
   description: "Root of the Blog Schema",
   fields: () => ({
-    getPosts: {
+    posts: {
       type: new GraphQLList(Post),
       resolve: function() {
         return PostsList;
