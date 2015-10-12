@@ -22,9 +22,9 @@ const Author = new GraphQLObjectType({
 });
 
 const Query = new GraphQLObjectType({
-  name: "Queries",
+  name: "RootQuery",
   fields: {
-    getAuthors: {
+    authors: {
       type: new GraphQLList(Author),
       resolve: function() {
         return [];
@@ -36,7 +36,7 @@ const Query = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: "Mutations",
   fields: {
-    addNewAuthor: {
+    createAuthor: {
       type: Author,
       args: {
         _id: {type: new GraphQLNonNull(GraphQLString)},
