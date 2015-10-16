@@ -1,4 +1,4 @@
-require("babel/register");
+require('babel/register');
 var express = require('express');
 var graphql = require('graphql');
 var expressGraphql = require('express-graphql');
@@ -12,4 +12,4 @@ app.use('/', expressGraphql({
 }));
 
 app.listen(3000);
-console.log("GraphQL Sandbox started on port: 3000");
+console.log('GraphQL Sandbox started on port: 3000');

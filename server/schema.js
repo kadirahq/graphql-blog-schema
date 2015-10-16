@@ -1,4 +1,4 @@
-import * as _ from "underscore";
+import * as _ from 'underscore';
 
 import {
   GraphQLList,
@@ -12,8 +12,8 @@ import {
 } from 'graphql';
 
 const Author = new GraphQLObjectType({
-  name: "Author",
-  description: "Represent the type of an author of a blog post or a comment",
+  name: 'Author',
+  description: 'Represent the type of an author of a blog post or a comment',
   fields: () => ({
     _id: {type: GraphQLString},
     name: {type: GraphQLString},
@@ -22,7 +22,7 @@ const Author = new GraphQLObjectType({
 });
 
 const Query = new GraphQLObjectType({
-  name: "Queries",
+  name: 'Queries',
   fields: {
     getAuthors: {
       type: new GraphQLList(Author),
@@ -34,7 +34,7 @@ const Query = new GraphQLObjectType({
 });
 
 const Mutation = new GraphQLObjectType({
-  name: "Mutations",
+  name: 'Mutations',
   fields: {
     addNewAuthor: {
       type: Author,
@@ -44,7 +44,7 @@ const Mutation = new GraphQLObjectType({
         twitterHandle: {type: GraphQLString}
       },
       resolve: function(rootValue, args) {
-        throw new Error("Not Implemented")
+        throw new Error('Not Implemented')
       }
     }
   }
