@@ -28,11 +28,11 @@ import {
 // This is the Root Query
 const Query = new GraphQLObjectType({
   name: 'BlogSchema',
-  description: "Root of the Blog Schema",
+  description: 'Root of the Blog Schema',
   fields: () => ({
     echo: {
       type: GraphQLString,
-      description: "Echo what you enter",
+      description: 'Echo what you enter',
       args: {
         message: {type: GraphQLString}
       },
