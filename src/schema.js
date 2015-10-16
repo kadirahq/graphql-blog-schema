@@ -26,8 +26,8 @@ import {
 **/
 
 const Author = new GraphQLObjectType({
-  name: "Author",
-  description: "This represent an author",
+  name: 'Author',
+  description: 'This represent an author',
   fields: () => ({
     _id: {type: new GraphQLNonNull(GraphQLString)},
     name: {type: GraphQLString}
@@ -35,8 +35,8 @@ const Author = new GraphQLObjectType({
 });
 
 const Post = new GraphQLObjectType({
-  name: "Post",
-  description: "This represent a Post",
+  name: 'Post',
+  description: 'This represent a Post',
   fields: () => ({
     _id: {type: new GraphQLNonNull(GraphQLString)},
     title: {type: new GraphQLNonNull(GraphQLString)},
@@ -53,7 +53,7 @@ const Post = new GraphQLObjectType({
 // This is the Root Query
 const Query = new GraphQLObjectType({
   name: 'BlogSchema',
-  description: "Root of the Blog Schema",
+  description: 'Root of the Blog Schema',
   fields: () => ({
     posts: {
       type: new GraphQLList(Post),
@@ -63,7 +63,7 @@ const Query = new GraphQLObjectType({
     },
     echo: {
       type: GraphQLString,
-      description: "Echo what you enter",
+      description: 'Echo what you enter',
       args: {
         message: {type: GraphQLString}
       },
