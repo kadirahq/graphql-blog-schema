@@ -14,7 +14,7 @@ import {
   GraphQLObjectType,
   GraphQLEnumType,
 
-  // This is used to create required fileds and arguments
+  // This is used to create required fields and arguments
   GraphQLNonNull,
 
   // This is the class we need to create the schema
@@ -43,7 +43,7 @@ const Query = new GraphQLObjectType({
   })
 });
 
-// This the Schema
+// The Schema
 const Schema = new GraphQLSchema({
   query: Query
 });
