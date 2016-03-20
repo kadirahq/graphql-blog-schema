@@ -23,7 +23,7 @@ const ReplyList = [
     _id: 'cid-' + Math.ceil(Math.random() * 99999999),
     content: 'If you need more information, just contact me.',
     author: 'arunoda'
-  },
+  }
 ];
 
 export default {

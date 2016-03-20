@@ -1,24 +1,24 @@
-import * as _ from 'underscore';
+// import * as _ from 'underscore';
 
 // This is the Dataset in our blog
-import PostsList from './data/posts';
-import AuthorsList from './data/authors';
-import {CommentList, ReplyList} from './data/comments';
+// import PostsList from './data/posts';
+// import AuthorsList from './data/authors';
+// import {CommentList, ReplyList} from './data/comments';
 
 import {
   // These are the basic GraphQL types
-  GraphQLInt,
-  GraphQLFloat,
+  // GraphQLInt,
+  // GraphQLFloat,
   GraphQLString,
-  GraphQLList,
+  // GraphQLList,
   GraphQLObjectType,
-  GraphQLEnumType,
+  // GraphQLEnumType,
 
   // This is used to create required fields and arguments
-  GraphQLNonNull,
+  // GraphQLNonNull,
 
   // This is the class we need to create the schema
-  GraphQLSchema,
+  GraphQLSchema
 } from 'graphql';
 
 /**

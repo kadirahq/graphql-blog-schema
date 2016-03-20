@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import GraphiQL from 'graphiql';
-import fetch from 'isomorphic-fetch';
 import Schema from './schema.js';
+import 'isomorphic-fetch';
+
 window.a = require('graphql');
 
 export default class App extends Component {
