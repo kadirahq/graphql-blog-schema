@@ -218,8 +218,8 @@ const Mutation = new GraphQLObjectType({
         category: {type: Category},
         author: {type: new GraphQLNonNull(GraphQLString), description: "Id of the author"}
       },
-      resolve: function(source, args) {
-        let post = _.clone(args);
+      resolve: function(source, {...args}) {
+        let post = args;
         var alreadyExists = _.findIndex(PostsList, p => p._id === post._id) >= 0;
         if(alreadyExists) {
           throw new Error("Post already exists: " + post._id);
@@ -249,8 +249,8 @@ const Mutation = new GraphQLObjectType({
         name: {type: new GraphQLNonNull(GraphQLString)},
         twitterHandle: {type: GraphQLString}
       },
-      resolve: function(source, args) {
-        let author = _.clone(args);
+      resolve: function(source, {...args}) {
+        let author = args;
         if(AuthorsMap[args._id]) {
           throw new Error("Author already exists: " + author._id);
         }
