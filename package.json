@@ -1,5 +1,5 @@
 {
-  "name": "react-hot-boilerplate",
+  "name": "graphql-blog-schema",
   "version": "1.0.0",
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
+    "url": "https://github.com/kadirahq/graphql-blog-schema.git"
   },
   "keywords": [
     "react",
@@ -21,12 +21,12 @@
     "edit",
     "webpack"
   ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "author": "KADIRA",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gaearon/react-hot-boilerplate/issues"
+    "url": "https://github.com/kadirahq/graphql-blog-schema/issues"
   },
-  "homepage": "https://github.com/gaearon/react-hot-boilerplate",
+  "homepage": "https://github.com/kadirahq/graphql-blog-schema",
   "devDependencies": {
     "eslint-plugin-react": "^2.3.0"
   },
