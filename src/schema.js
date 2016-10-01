@@ -28,36 +28,36 @@ import {
 const Author = new GraphQLObjectType({
   name: 'Author',
   description: 'This represent an author',
-  fields: () => ({
+  fields: {
     _id: {type: new GraphQLNonNull(GraphQLString)},
     name: {type: GraphQLString}
-  })
+  }
 });
 
 const Post = new GraphQLObjectType({
   name: 'Post',
   description: 'This represent a Post',
-  fields: () => ({
+  fields: {
     _id: {type: new GraphQLNonNull(GraphQLString)},
     title: {type: new GraphQLNonNull(GraphQLString)},
     content: {type: GraphQLString},
     author: {
       type: Author,
-      resolve: function(post) {
-        return _.find(AuthorsList, a => a._id == post.author);
+      resolve(post) {
+        return AuthorsList.find(a => a._id == post.author);
       }
     }
-  })
+  }
 });
 
 // This is the Root Query
 const Query = new GraphQLObjectType({
   name: 'BlogSchema',
   description: 'Root of the Blog Schema',
-  fields: () => ({
+  fields: {
     posts: {
       type: new GraphQLList(Post),
-      resolve: function() {
+      resolve() {
         return PostsList;
       }
     },
@@ -67,11 +67,11 @@ const Query = new GraphQLObjectType({
       args: {
         message: {type: GraphQLString}
       },
-      resolve: function(source, {message}) {
+      resolve(source, {message}) {
         return {aa: 10};
       }
     }
-  })
+  }
 });
 
 // This the Schema
