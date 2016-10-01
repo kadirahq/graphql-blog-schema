@@ -29,18 +29,18 @@ import {
 const Query = new GraphQLObjectType({
   name: 'BlogSchema',
   description: 'Root of the Blog Schema',
-  fields: () => ({
+  fields: {
     echo: {
       type: GraphQLString,
       description: 'Echo what you enter',
       args: {
         message: {type: GraphQLString}
       },
-      resolve: function(source, {message}) {
+      resolve(source, {message}) {
         return `received ${message}`;
       }
     }
-  })
+  }
 });
 
 // The Schema
