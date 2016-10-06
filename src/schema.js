@@ -68,7 +68,7 @@ const Query = new GraphQLObjectType({
         message: {type: GraphQLString}
       },
       resolve: function(source, {message}) {
-        return {aa: 10};
+        return `received ${message}`;
       }
     }
   })
