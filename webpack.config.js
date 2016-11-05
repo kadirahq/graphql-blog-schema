@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var plugins = [new webpack.HotModuleReplacementPlugin()];
 var entry = ['./src/index'];
 
-if(process.env.NODE_ENV === "production") {
+if(process.env.NODE_ENV === 'production') {
   plugins.push(new webpack.optimize.UglifyJsPlugin({minimize: true, comments: false}));
 } else {
   entry.push('webpack-dev-server/client?http://localhost:3000');

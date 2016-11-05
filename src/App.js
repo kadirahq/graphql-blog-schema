@@ -9,7 +9,7 @@ GraphiQL.Logo = class Logo extends Component {
     let style = {
       fontWeight: 800,
       fontSize: 16,
-      color: "#252525"
+      color: '#252525'
     };
 
     return (
