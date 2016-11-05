@@ -17,19 +17,19 @@ import {
 } from 'graphql';
 
 const Category = new GraphQLEnumType({
-  name: "Category",
-  description: "A Category of the blog",
+  name: 'Category',
+  description: 'A Category of the blog',
   values: {
-    METEOR: {value: "meteor"},
-    PRODUCT: {value: "product"},
-    USER_STORY: {value: "user-story"},
+    METEOR: {value: 'meteor'},
+    PRODUCT: {value: 'product'},
+    USER_STORY: {value: 'user-story'},
     OTHER: {value: 'other'}
   }
 });
 
 const Author = new GraphQLObjectType({
-  name: "Author",
-  description: "Represent the type of an author of a blog post or a comment",
+  name: 'Author',
+  description: 'Represent the type of an author of a blog post or a comment',
   fields: () => ({
     _id: {type: GraphQLString},
     name: {type: GraphQLString},
@@ -38,8 +38,8 @@ const Author = new GraphQLObjectType({
 });
 
 const HasAuthor = new GraphQLInterfaceType({
-  name: "HasAuthor",
-  description: "This type has an author",
+  name: 'HasAuthor',
+  description: 'This type has an author',
   fields: () => ({
     author: {type: Author}
   }),
@@ -55,9 +55,9 @@ const HasAuthor = new GraphQLInterfaceType({
 });
 
 const Comment = new GraphQLObjectType({
-  name: "Comment",
+  name: 'Comment',
   interfaces: [HasAuthor],
-  description: "Represent the type of a comment",
+  description: 'Represent the type of a comment',
   fields: () => ({
     _id: {type: GraphQLString},
     content: {type: GraphQLString},
@@ -70,7 +70,7 @@ const Comment = new GraphQLObjectType({
     timestamp: {type: GraphQLFloat},
     replies: {
       type: new GraphQLList(Comment),
-      description: "Replies for the comment",
+      description: 'Replies for the comment',
       resolve: function() {
         return ReplyList;
       }
@@ -79,9 +79,9 @@ const Comment = new GraphQLObjectType({
 });
 
 const Post = new GraphQLObjectType({
-  name: "Post",
+  name: 'Post',
   interfaces: [HasAuthor],
-  description: "Represent the type of a blog post",
+  description: 'Represent the type of a blog post',
   fields: () => ({
     _id: {type: GraphQLString},
     title: {type: GraphQLString},
@@ -101,7 +101,7 @@ const Post = new GraphQLObjectType({
     comments: {
       type: new GraphQLList(Comment),
       args: {
-        limit: {type: GraphQLInt, description: "Limit the comments returing"}
+        limit: {type: GraphQLInt, description: 'Limit the comments returing'}
       },
       resolve: function(post, {limit}) {
         if(limit >= 0) {
@@ -122,11 +122,11 @@ const Post = new GraphQLObjectType({
 
 const Query = new GraphQLObjectType({
   name: 'BlogSchema',
-  description: "Root of the Blog Schema",
+  description: 'Root of the Blog Schema',
   fields: () => ({
     posts: {
       type: new GraphQLList(Post),
-      description: "List of posts in the blog",
+      description: 'List of posts in the blog',
       args: {
         category: {type: Category}
       },
@@ -141,7 +141,7 @@ const Query = new GraphQLObjectType({
 
     latestPost: {
       type: Post,
-      description: "Latest post in the blog",
+      description: 'Latest post in the blog',
       resolve: function() {
         PostsList.sort((a, b) => {
           var bTime = new Date(b.date['$date']).getTime();
@@ -156,7 +156,7 @@ const Query = new GraphQLObjectType({
 
     recentPosts: {
       type: new GraphQLList(Post),
-      description: "Recent posts in the blog",
+      description: 'Recent posts in the blog',
       args: {
         count: {type: new GraphQLNonNull(GraphQLInt), description: 'Number of recent items'}
       },
@@ -174,7 +174,7 @@ const Query = new GraphQLObjectType({
 
     post: {
       type: Post,
-      description: "Post by _id",
+      description: 'Post by _id',
       args: {
         _id: {type: new GraphQLNonNull(GraphQLString)}
       },
@@ -185,7 +185,7 @@ const Query = new GraphQLObjectType({
 
     authors: {
       type: new GraphQLList(Author),
-      description: "Available authors in the blog",
+      description: 'Available authors in the blog',
       resolve: function() {
         return _.values(AuthorsMap);
       }
@@ -193,7 +193,7 @@ const Query = new GraphQLObjectType({
 
     author: {
       type: Author,
-      description: "Author by _id",
+      description: 'Author by _id',
       args: {
         _id: {type: new GraphQLNonNull(GraphQLString)}
       },
@@ -205,28 +205,28 @@ const Query = new GraphQLObjectType({
 });
 
 const Mutation = new GraphQLObjectType({
-  name: "BlogMutations",
+  name: 'BlogMutations',
   fields: {
     createPost: {
       type: Post,
-      description: "Create a new blog post",
+      description: 'Create a new blog post',
       args: {
         _id: {type: new GraphQLNonNull(GraphQLString)},
         title: {type: new GraphQLNonNull(GraphQLString)},
         content: {type: new GraphQLNonNull(GraphQLString)},
         summary: {type: GraphQLString},
         category: {type: Category},
-        author: {type: new GraphQLNonNull(GraphQLString), description: "Id of the author"}
+        author: {type: new GraphQLNonNull(GraphQLString), description: 'Id of the author'}
       },
       resolve: function(source, {...args}) {
         let post = args;
         var alreadyExists = _.findIndex(PostsList, p => p._id === post._id) >= 0;
         if(alreadyExists) {
-          throw new Error("Post already exists: " + post._id);
+          throw new Error('Post already exists: ' + post._id);
         }
 
         if(!AuthorsMap[post.author]) {
-          throw new Error("No such author: " + post.author);
+          throw new Error('No such author: ' + post.author);
         }
 
         if(!post.summary) {
@@ -243,7 +243,7 @@ const Mutation = new GraphQLObjectType({
 
     createAuthor: {
       type: Author,
-      description: "Create a new author",
+      description: 'Create a new author',
       args: {
         _id: {type: new GraphQLNonNull(GraphQLString)},
         name: {type: new GraphQLNonNull(GraphQLString)},
@@ -252,7 +252,7 @@ const Mutation = new GraphQLObjectType({
       resolve: function(source, {...args}) {
         let author = args;
         if(AuthorsMap[args._id]) {
-          throw new Error("Author already exists: " + author._id);
+          throw new Error('Author already exists: ' + author._id);
         }
 
         AuthorsMap[author._id] = author;

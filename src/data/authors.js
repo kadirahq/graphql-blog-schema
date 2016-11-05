@@ -1,18 +1,18 @@
 const AuthorsMap = {
-  "arunoda": {
-    _id: "arunoda", 
-    name: "Arunoda Susiripala",
-    twitterHandle: "@arunoda"
+  'arunoda': {
+    _id: 'arunoda',
+    name: 'Arunoda Susiripala',
+    twitterHandle: '@arunoda'
   },
-  "pahan": {
-    _id: "pahan", 
-    name: "Pahan Sarathchandra",
-    twitterHandle: "@pahans"
+  'pahan': {
+    _id: 'pahan',
+    name: 'Pahan Sarathchandra',
+    twitterHandle: '@pahans'
   },
-  "indi": {
-    _id: "indi", 
-    name: "Kasun Indi",
-    twitterHandle: "@indi"
+  'indi': {
+    _id: 'indi',
+    name: 'Kasun Indi',
+    twitterHandle: '@indi'
   }
 };
 

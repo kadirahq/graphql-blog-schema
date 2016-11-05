@@ -13,4 +13,4 @@ app.use('/static', express.static('static'));
 
 var port = process.env.PORT || 3000
 app.listen(port);
-console.log("App started on port: " + port);
+console.log('App started on port: ' + port);
