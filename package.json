@@ -1,9 +1,10 @@
 {
-  "name": "react-hot-boilerplate",
+  "name": "learngraphql-sandbox",
   "version": "1.0.0",
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
-    "start": "node dev-server.js",
+    "build": "sh build.sh",
+    "start": "NODE_ENV=production node server",
     "lint": "eslint src"
   },
   "repository": {
